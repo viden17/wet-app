@@ -31,7 +31,7 @@ export default function Index() {
         <View>
           <View className="">
             <Text className="font-inter text-lg text-center text-primary-300">
-              Hey Viden, {"\n"} Welcome to Viden's Profile
+              Hey Viden 2, {"\n"} Welcome to Viden's Profile
             </Text>
           </View>
         </View>
