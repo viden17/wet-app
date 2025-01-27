@@ -44,7 +44,7 @@ export default function Index() {
           </View>
         </View>
         <View className="mt-3 flex flex-row items-center justify-center">
-          <Image source={images.logoImg} />
+          <Image source={images.profilePic} />
         </View>
 
         {/* body */}
