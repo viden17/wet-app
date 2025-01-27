@@ -11,6 +11,14 @@ export default function Index() {
     router.push("/sign-in");
   }
 
+  const handleBtnPetProfile = () => {
+    router.push("/pet/pet-profile");
+  }
+
+  const handleBtnMedicalRecords = () => {
+    router.push("/pet/medical-record");
+  }
+
   return (
     // <View
     //   style={{
@@ -72,13 +80,13 @@ export default function Index() {
 
           {/* body: actions */}
           <View className="w-4/5 mx-auto mt-6 flex flex-col gap-4">
-            <TouchableOpacity className="px-4 py-3 rounded-lg shadow bg-primary-200">
+            <TouchableOpacity onPress={handleBtnPetProfile} className="px-4 py-3 rounded-lg shadow bg-primary-200">
               <View className="flex flex-row items-center">
                 <Image source={icons.user} className="w-10 h-10" />
                 <Text className="ps-4 text-lg text-primary-300">Pet Profile</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity className="px-4 py-3 rounded-lg shadow bg-primary-200">
+            <TouchableOpacity onPress={handleBtnMedicalRecords} className="px-4 py-3 rounded-lg shadow bg-primary-200">
               <View className="flex flex-row items-center">
                 <Image source={icons.sheets} className="w-10 h-10" />
                 <Text className="ps-4 text-lg text-primary-300">Medical Records</Text>
