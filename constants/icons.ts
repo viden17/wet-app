@@ -8,6 +8,8 @@ import settings from "@/assets/icons/settings.png";
 import sos from "@/assets/icons/sos.png";
 import bell from "@/assets/icons/bell.png";
 import calendar from "@/assets/icons/calendar.png";
+import btnBack from "@/assets/icons/back-button.png";
+import btnForwardArrow from "@/assets/icons/forward-arrow.png";
 
 export default {
   content,
@@ -20,4 +22,6 @@ export default {
   sos,
   bell,
   calendar,
+  btnBack,
+  btnForwardArrow,
 };
