@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+
+
 import 'package:project_one/screens/auth_page.dart';
   // Import the AuthPage
 

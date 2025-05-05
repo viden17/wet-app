@@ -70,7 +70,22 @@ class BottomNavBar extends StatelessWidget {
               primaryColor: primaryColor,
               secondaryColor: secondaryColor,
             ),
-          ],
+             _buildNavItem(
+              index: 4,
+              label: "Dog Food",
+              icon: Icons.pets_rounded,
+        
+              primaryColor: primaryColor,
+              secondaryColor: secondaryColor,
+            ),
+               _buildNavItem(
+              index: 5,
+              label: "Channel Doctor",
+              icon: Icons.local_hospital_rounded,
+              primaryColor: primaryColor,
+              secondaryColor: secondaryColor,
+            ),
+                      ],
         ),
       ),
     );

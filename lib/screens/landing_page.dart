@@ -14,6 +14,16 @@ class LandingPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
+            // App name
+            const Text(
+              "Pet Link",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 20),
             // Progress indicator
             Padding(padding: const EdgeInsets.symmetric(horizontal: 40)),
             const SizedBox(height: 40),
@@ -34,7 +44,7 @@ class LandingPage extends StatelessWidget {
                   ),
                   // Pets and food image
                   Image.asset(
-                    'assets/images/pet_with_food.png',
+                    'assets/images/logo.jpg',
                     height: 260,
                     fit: BoxFit.contain,
                   ),

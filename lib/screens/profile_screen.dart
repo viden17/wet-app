@@ -133,12 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             }
           }, // Add edit logic
         ),
-        IconButton(
-  icon: const Icon(Icons.refresh_rounded, color: Colors.white),
-  onPressed: () {
-    Restart.restartApp(); // 🔄 Restart the whole app
-  },
-),
+ 
         IconButton(
           icon: const Icon(Icons.pets_rounded, color: Colors.white),
           onPressed: () async {

@@ -470,12 +470,12 @@ class _VaccinationsScreenState extends State<VaccinationsScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddVaccineForm,
-        child: Icon(Icons.add, color: Colors.white),
-        backgroundColor: Colors.teal,
-        tooltip: "Add New Vaccination",
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _showAddVaccineForm,
+      //   child: Icon(Icons.add, color: Colors.white),
+      //   backgroundColor: Colors.teal,
+      //   tooltip: "Add New Vaccination",
+      // ),
     );
   }
 

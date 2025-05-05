@@ -9,6 +9,9 @@ class MedicalRecordsScreen extends StatefulWidget {
   State<MedicalRecordsScreen> createState() => _MedicalRecordsScreenState();
 }
 
+
+
+
 class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
   List<bool> expandedStates = [];
 
@@ -32,7 +35,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.pets, color: Colors.white),
+            icon: Icon(Icons.add_circle_outline, color: Colors.white),
             onPressed: _showAddRecordForm,
           ),
           SizedBox(width: 8), // Add a bit of padding
@@ -179,11 +182,11 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddRecordForm,
-        backgroundColor: Color(0xFF4CAF50),
-        child: Icon(Icons.add, color: Colors.white),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _showAddRecordForm,
+      //   backgroundColor: Color(0xFF4CAF50),
+      //   child: Icon(Icons.add, color: Colors.white),
+      // ),
     );
   }
 
