@@ -23,6 +23,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isNewUser = true;
   PetProfileModel? _petProfile;
 
+  // Add this to the state
+  String _selectedLanguage = 'Sinhala';
+
   @override
   void dispose() {
     _isDisposed = true;
@@ -203,7 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildInfoRow(
             icon: Icons.cake_rounded,
             title: "Age & Birthday",
-            value: "${_petProfile!.age} - ${_petProfile!.birthday}",
+            value: "${_petProfile!.age} - ${_petProfile!.birthday}",
           ),
           _buildInfoRow(
             icon: Icons.fitness_center_rounded,
@@ -215,6 +218,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: "Height",
             value: "${_petProfile!.height} cm",
             showDivider: false,
+          ),
+          const SizedBox(height: 30),
+          // Settings Section
+          Row(
+            children: [
+              Icon(Icons.settings, color: Colors.green[600]),
+              const SizedBox(width: 10),
+              const Text(
+                "Settings",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            "Languages",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedLanguage = 'Sinhala';
+                  });
+                  Fluttertoast.showToast(msg: 'Sinhala selected', backgroundColor: Colors.green, textColor: Colors.white);
+                },
+                child: Chip(
+                  label: Text('Sinhala', style: TextStyle(color: _selectedLanguage == 'Sinhala' ? Colors.white : Colors.black)),
+                  backgroundColor: _selectedLanguage == 'Sinhala' ? Colors.green : Colors.greenAccent,
+                ),
+              ),
+              SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedLanguage = 'Tamil';
+                  });
+                  Fluttertoast.showToast(msg: 'Tamil selected', backgroundColor: Colors.green, textColor: Colors.white);
+                },
+                child: Chip(
+                  label: Text('Tamil', style: TextStyle(color: _selectedLanguage == 'Tamil' ? Colors.white : Colors.black)),
+                  backgroundColor: _selectedLanguage == 'Tamil' ? Colors.green : Colors.greenAccent,
+                ),
+              ),
+              SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedLanguage = 'English';
+                  });
+                  Fluttertoast.showToast(msg: 'English selected', backgroundColor: Colors.green, textColor: Colors.white);
+                },
+                child: Chip(
+                  label: Text('English', style: TextStyle(color: _selectedLanguage == 'English' ? Colors.white : Colors.black)),
+                  backgroundColor: _selectedLanguage == 'English' ? Colors.green : Colors.greenAccent,
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -1,7 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-class ProfilePicture extends StatelessWidget {
+class ProfilePicture extends StatefulWidget {
   const ProfilePicture({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePicture> createState() => _ProfilePictureState();
+}
+
+class _ProfilePictureState extends State<ProfilePicture> {
+  File? _imageFile;
+  bool _isPicking = false;
+
+  Future<void> _pickImage() async {
+    if (_isPicking) return; // Prevent multiple pickers
+    setState(() {
+      _isPicking = true;
+    });
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        setState(() {
+          _imageFile = File(pickedFile.path);
+        });
+      }
+    } catch (e) {
+      // Optionally handle error
+    } finally {
+      setState(() {
+        _isPicking = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,30 +50,33 @@ class ProfilePicture extends StatelessWidget {
               end: Alignment.bottomRight,
             ),
           ),
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 60,
             backgroundColor: Colors.white,
-            backgroundImage: NetworkImage(
-              "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-            ),
+            backgroundImage: _imageFile != null
+                ? FileImage(_imageFile!)
+                : const AssetImage('assets/images/profile.jpeg') as ImageProvider,
           ),
         ),
-        Container(
-          padding: const EdgeInsets.all(2),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
+        GestureDetector(
+          onTap: _pickImage,
           child: Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: Colors.green[600],
+            padding: const EdgeInsets.all(2),
+            decoration: const BoxDecoration(
+              color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
-              Icons.camera_alt_rounded,
-              size: 18,
-              color: Colors.white,
+            child: Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Colors.green[600],
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.camera_alt_rounded,
+                size: 18,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

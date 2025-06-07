@@ -9,7 +9,7 @@ import 'package:project_one/screens/auth_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();  // Initialize Firebase
-  runApp(PetCareBuddyApp());  // Start the app
+  runApp(PetCareBuddyApp());  // Start the appf
 }
 
 class PetCareBuddyApp extends StatelessWidget {

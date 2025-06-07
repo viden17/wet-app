@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_one/screens/channel_doctor_screen.dart';
 import 'package:project_one/screens/dog_food_center_screen.dart';
 import 'package:project_one/screens/find_vet_screen.dart';
+
 import 'package:project_one/screens/medical_records_screen.dart';
 
 import 'package:project_one/screens/profile_screen.dart';
@@ -51,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ProfileScreen(),
           MedicalRecordsScreen(),
           VaccinationsScreen(),
-          FindvetScreen(),
+          rider_profile(),
+          
     
           DogFoodStoreScreen(),
           ChannelDoctorScreen()

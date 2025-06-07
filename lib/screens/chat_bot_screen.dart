@@ -44,7 +44,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       return Align(
                         alignment:
                             isUser ? Alignment.centerRight : Alignment.centerLeft,
-                        child: Container(
+                        child: Container( 
                           margin: const EdgeInsets.symmetric(vertical: 6),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 10),
@@ -162,92 +162,64 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   }
 
   Future<String> getSmartReplyFromGemini(String userPrompt) async {
-  // Get user data
-  final domainData = await getUserDomainData();
-  final petProfile = domainData['petProfile'];
-  final medicalRecords = domainData['medicalRecords'];
-  final vaccines = domainData['vaccines'];
+    // Get user data
+    final domainData = await getUserDomainData();
+    final petProfile = domainData['petProfile'];
+    final medicalRecords = domainData['medicalRecords'];
+    final vaccines = domainData['vaccines'];
 
-  // Build the context for the chatbot based on the user data
-  // String context = "Pet Info:\n";
-  // if (petProfile.isNotEmpty) {
-  //   context +=
-  //       "Name: ${petProfile['name']}, Breed: ${petProfile['breed']}, Type: ${petProfile['type']}, Age: ${petProfile['age']}, Weight: ${petProfile['weight']}kg, Height: ${petProfile['height']}m.\n";
-  // }
-
-  // context += "\nMedical Records:\n";
-  // for (var record in medicalRecords) {
-  //   context +=
-  //       "Virus: ${record        final medicalRecordController = MedicalRecordController();
-  //       final medicalRecordsStream = medicalRecordController.getUserMedicalRecords();
-        
-  //       medicalRecordsStream.listen((medicalRecords) {
-  //         for (var record in medicalRecords) {
-  //           print('Virus: ${record.virus}, Vet Name: ${record.vetName}');
-  //         }
-  //       });.virus}, Vet Name: ${record.vetName}, Type: ${record.type}, Date: ${record.date}, Purpose: ${record.purpose}, Comment: ${record.comment}, Expires: ${record.expires}\n";
-  // }
-
-  // context += "\nVaccines:\n";
-  // for (var vaccine in vaccines) {
-  //   context +=
-  //       "Vaccine: ${vaccine['name']}, Type: ${vaccine['type']}, Administered Date: ${vaccine['administeredDate']}, Expiry Date: ${vaccine['expiredDate']}, Weight: ${vaccine['weight']}kg, Vet: ${vaccine['vetName']}, Vet Phone: ${vaccine['vetPhoneNumber']}\n";
-  // }
-// Build the context for the chatbot based on the user data
-String context = "Pet Info:\n";
-
-  context +=
-      "Name: Max, Breed: Golden Retriever, Type: Dog, Age: 5 years, Weight: 30kg, Height: 0.6m.\n";
-
-
-context += "\nMedical Records:\n";
-
-  context +=
-      "Virus: Parvovirus, Vet Name: Dr. Smith, Type: Vaccination, Date: 2024-02-10, Purpose: Preventative, Comment: No side effects, Expires: 2025-02-10\n";
-
-
-context += "\nVaccines:\n";
-
-  context +=
-      "Vaccine: Rabies, Type: Injection, Administered Date: 2023-09-15, Expiry Date: 2026-09-15, Weight: 30kg, Vet: Dr. Johnson, Vet Phone: +1234567890\n";
-
-  String finalPrompt =
-      "Based on the following pet medical data:\n$context\n\nUser question: $userPrompt\n\nRespond in simple English with a useful suggestion for the owner.";
-
-  final body = jsonEncode({
-    "contents": [
-      {
-        "parts": [
-          {"text": finalPrompt}
-        ]
-      }
-    ]
-  });
-
-  // Make the API request
-  try {
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: body,
-    );
-
-    // print('Response Status: ${response.statusCode}');
-    // print('Response Body: ${response.body}');  // Print entire response for debugging
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      print('Parsed Data: $data'); // Log parsed data to check its structure
-      final reply = data['candidates'][0]['content']['parts'][0]['text'];
-      return reply.trim();
-    } else {
-      return 'Error getting reply: ${response.statusCode}';
+    // Build the context for the chatbot based on the user data
+    String context = "Pet Info:\n";
+    if (petProfile.isNotEmpty) {
+      context +=
+          "Name: ${petProfile['name']}, Breed: ${petProfile['breed']}, Type: ${petProfile['type']}, Age: ${petProfile['age']}, Weight: ${petProfile['weight']}kg, Height: ${petProfile['height']}m.\n";
     }
-  } catch (e) {
-    return 'Failed to get reply: $e';
+
+    context += "\nMedical Records:\n";
+    for (var record in medicalRecords) {
+      context +=
+          "Virus: ${record.virus}, Vet Name: ${record.vetName}, Type: ${record.type}, Date: ${record.date}, Purpose: ${record.purpose}, Comment: ${record.comment}, Expires: ${record.expires}\n";
+    }
+
+    context += "\nVaccines:\n";
+    for (var vaccine in vaccines) {
+      context +=
+          "Vaccine: ${vaccine.name}, Type: ${vaccine.type}, Administered Date: ${vaccine.administeredDate}, Expiry Date: ${vaccine.expiredDate}, Weight: ${vaccine.weight}kg, Vet: ${vaccine.vetName}, Vet Phone: ${vaccine.vetPhoneNumber}\n";
+    }
+
+    String finalPrompt =
+        "Based on the following pet medical data:\n$context\n\nUser question: $userPrompt\n\nRespond in simple English with a useful suggestion for the owner.";
+
+    final body = jsonEncode({
+      "contents": [
+        {
+          "parts": [
+            {"text": finalPrompt}
+          ]
+        }
+      ]
+    });
+
+    // Make the API request
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final reply = data['candidates'][0]['content']['parts'][0]['text'];
+        return reply.trim();
+      } else {
+        return 'Error getting reply: ${response.statusCode}';
+      }
+    } catch (e) {
+      return 'Failed to get reply: $e';
+    }
   }
-}
 
 }

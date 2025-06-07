@@ -39,20 +39,25 @@ class Vaccine {
   }
 
   factory Vaccine.fromDocument(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    DateTime administeredDate = (data['administeredDate'] as Timestamp).toDate();
-    DateTime expiredDate = (data['expiredDate'] as Timestamp).toDate();
-    return Vaccine(
-      id: doc.id, // Firestore auto-generates the id
-      name: data['name'],
-      type: data['type'],
-      administeredDate: administeredDate,
-      expiredDate: expiredDate,
-      weight: data['weight'],
-      vetName: data['vetName'],
-      vetPhoneNumber: data['vetPhoneNumber'],
-      userId: data['userId'], // Added userId field
-    );
+    try {
+      final data = doc.data() as Map<String, dynamic>;
+      DateTime administeredDate = (data['administeredDate'] as Timestamp).toDate();
+      DateTime expiredDate = (data['expiredDate'] as Timestamp).toDate();
+      return Vaccine(
+        id: doc.id, // Firestore auto-generates the id
+        name: data['name'] ?? 'Unknown',
+        type: data['type'] ?? 'Unknown',
+        administeredDate: administeredDate,
+        expiredDate: expiredDate,
+        weight: data['weight'] ?? 0.0,
+        vetName: data['vetName'] ?? 'Unknown',
+        vetPhoneNumber: data['vetPhoneNumber'] ?? 'Unknown',
+        userId: data['userId'] ?? '', // Added userId field
+      );
+    } catch (e) {
+      print('Error parsing Vaccine document: $e');
+      throw Exception('Invalid Vaccine data');
+    }
   }
 }
 

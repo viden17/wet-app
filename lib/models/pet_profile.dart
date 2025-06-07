@@ -10,6 +10,7 @@ class PetProfileModel {
   String birthday;
   double weight;
   double height;
+  
 
   PetProfileModel({
     required this.name,
@@ -19,6 +20,7 @@ class PetProfileModel {
     required this.birthday,
     required this.weight,
     required this.height,
+    
   });
 
   Map<String, dynamic> toMap() {
@@ -30,6 +32,7 @@ class PetProfileModel {
       'weight': weight,
       'height': height,
       'type': type,
+      
     };
   }
 
@@ -42,7 +45,9 @@ class PetProfileModel {
       birthday: map['birthday'] ?? '',
       weight: map['weight']?.toDouble() ?? 0.0,
       height: map['height']?.toDouble() ?? 0.0,
-    );
+    
+    );  
+    
   }
 }
 
